@@ -8,6 +8,8 @@
   export let onRemove: () => void
   export let notification: Notification
 
+  const signupUrl = getMetadata(presentation.metadata.SignupUrl) ?? ''
+
   function joinWorkspace (e: MouseEvent): void {
     navigate({ path: ['login', 'join'], query: { workspace: getCurrentWorkspaceUrl() } })
   }
@@ -23,9 +25,11 @@
       {#if $allowGuestSignUpStore}
         <Button label={view.string.ReadOnlyJoinWorkspace} stopPropagation={false} on:click={joinWorkspace} />
       {/if}
-      <a href={getMetadata(presentation.metadata.SignupUrl)} target="_blank">
-        <Button label={view.string.ReadOnlySignUp} stopPropagation={false} kind="primary" />
-      </a>
+      {#if signupUrl !== ''}
+        <a href={signupUrl} target="_blank" rel="noopener noreferrer">
+          <Button label={view.string.ReadOnlySignUp} stopPropagation={false} kind="primary" />
+        </a>
+      {/if}
     </div>
   </svelte:fragment>
 </NotificationToast>

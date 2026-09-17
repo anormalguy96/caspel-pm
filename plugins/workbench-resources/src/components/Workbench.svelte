@@ -41,7 +41,7 @@
     reduceCalls
   } from '@hcengineering/presentation'
   import setting from '@hcengineering/setting'
-  import support, { supportLink, SupportStatus } from '@hcengineering/support'
+  import support, { safeExternalLink, SupportStatus } from '@hcengineering/support'
   import {
     AnyComponent,
     areLocationsEqual,
@@ -155,6 +155,7 @@
 
   const excludedApps = getMetadata(workbench.metadata.ExcludedApplications) ?? []
   const isCommunicationEnabled = getMetadata(communication.metadata.Enabled) ?? false
+  const supportLink = safeExternalLink(getMetadata(support.metadata.SupportLink))
 
   const client = getClient()
 
@@ -931,16 +932,18 @@
           size={appsMini ? 'small' : 'large'}
           on:click={() => showPopup(AppSwitcher, { apps }, popupPosition)}
         />
-        <a href={supportLink} target="_blank" rel="noopener noreferrer">
-          <AppItem
-            icon={support.icon.Support}
-            label={support.string.ContactUs}
-            size={appsMini ? 'small' : 'large'}
-            notify={supportStatus?.hasUnreadMessages}
-            selected={supportStatus?.visible}
-            loading={supportWidgetLoading}
-          />
-        </a>
+        {#if supportLink !== ''}
+          <a href={supportLink} target="_blank" rel="noopener noreferrer">
+            <AppItem
+              icon={support.icon.Support}
+              label={support.string.ContactUs}
+              size={appsMini ? 'small' : 'large'}
+              notify={supportStatus?.hasUnreadMessages}
+              selected={supportStatus?.visible}
+              loading={supportWidgetLoading}
+            />
+          </a>
+        {/if}
         <!-- {#await supportClient then client}
           {#if client}
             <AppItem

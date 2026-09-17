@@ -29,57 +29,20 @@
   }
 </script>
 
-<div class="flex-row-center caption">
-  {#if !signUpDisabled}
-    <a
-      class="title"
-      class:selected={loginState === 'signup'}
-      href="."
-      on:click|preventDefault={() => {
-        if (loginState !== 'signup') goTab('signup')
-      }}
-    >
-      <Label label={login.string.SignUp} />
-    </a>
-  {/if}
-  <a
-    class="title"
-    class:selected={loginState === 'login'}
-    href="."
-    on:click|preventDefault={() => {
-      if (loginState !== 'login') goTab('login')
-    }}
-  >
-    <Label label={login.string.LogIn} />
-  </a>
+<div class="caption">
+  <h2 class="title"><Label label={login.string.LogIn} /></h2>
 </div>
 
 <style>
-  .title {
-    font-weight: 500;
-    font-size: 1.25rem;
-    color: var(--theme-caption-color);
+  .caption {
+    margin-bottom: 0.75rem;
   }
-  .caption a {
-    padding-bottom: 0.375rem;
-    border-bottom: 2px solid var(--theme-caption-color);
-
-    &:not(.selected) {
-      color: var(--theme-dark-color);
-      border-bottom-color: transparent;
-
-      &:hover {
-        color: var(--theme-caption-color);
-      }
-    }
-    &.selected {
-      cursor: default;
-    }
-    &:first-child {
-      margin-right: 1.75rem;
-    }
-    &:hover {
-      text-decoration: none;
-    }
+  .title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: var(--theme-caption-color);
+    letter-spacing: -0.01em;
   }
 </style>

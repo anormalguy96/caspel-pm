@@ -201,14 +201,26 @@
 
         {#if workspaces.length === 0 && account?.token != null}
           <div class="form-row send">
-            <Button
-              label={isReadOnlyGuest ? login.string.SignUp : login.string.CreateWorkspace}
-              kind={'primary'}
-              width="100%"
-              on:click={() => {
-                goTo(isReadOnlyGuest ? 'signup' : 'createWorkspace')
-              }}
-            />
+            {#if isReadOnlyGuest}
+              <Button
+                label={login.string.LogIn}
+                kind={'primary'}
+                width="100%"
+                on:click={async () => {
+                  await logOut()
+                  goTo('login', true)
+                }}
+              />
+            {:else}
+              <Button
+                label={login.string.CreateWorkspace}
+                kind={'primary'}
+                width="100%"
+                on:click={() => {
+                  goTo('createWorkspace')
+                }}
+              />
+            {/if}
           </div>
         {/if}
       </div>

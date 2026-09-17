@@ -21,10 +21,24 @@ import { SupportClientFactory, SupportConversation, SupportSystem } from './type
 export * from './types'
 export { deleteSupportConversation, updateSupportConversation } from './utils'
 
-export const supportLink = 'https://link.huly.io/slack'
-export const reportBugLink = 'https://github.com/hcengineering/platform/issues/new'
-export const docsLink = 'http://docs.huly.io/'
-export const privacyPolicyLink = 'https://v1.huly.io/legal/privacy/'
+// Caspel PM: no default destinations. Upstream Huly community/docs/privacy URLs
+// must not reach employees. Configure per host via branding.json `support`;
+// empty values hide the corresponding UI entry.
+export const supportLink = ''
+export const reportBugLink = ''
+export const docsLink = ''
+export const privacyPolicyLink = ''
+
+/**
+ * Returns the link if it is an absolute http(s) URL, otherwise an empty string,
+ * so operator-provided branding values cannot inject `javascript:` or other schemes.
+ * @public
+ */
+export function safeExternalLink (link: string | undefined): string {
+  if (link === undefined) return ''
+  const value = link.trim()
+  return /^https?:\/\//i.test(value) ? value : ''
+}
 
 /**
  * @public

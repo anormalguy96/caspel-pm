@@ -16,7 +16,7 @@
   import { Asset, getMetadata, IntlString } from '@hcengineering/platform'
   import { getClient } from '@hcengineering/presentation'
   import setting, { settingId } from '@hcengineering/setting'
-  import support from '@hcengineering/support'
+  import support, { safeExternalLink } from '@hcengineering/support'
   import {
     AnySvelteComponent,
     Button,
@@ -89,16 +89,25 @@
     disabled?: boolean
   }
 
+  const docsLink = safeExternalLink(getMetadata(support.metadata.DocsLink))
+  const privacyPolicyLink = safeExternalLink(getMetadata(support.metadata.PrivacyPolicyLink))
+  const reportBugLink = safeExternalLink(getMetadata(support.metadata.ReportBugLink))
+  const supportLink = safeExternalLink(getMetadata(support.metadata.SupportLink))
+
   const cards: HelpCard[] = [
-    {
-      icon: DocumentationIcon,
-      title: workbench.string.Documentation,
-      description: workbench.string.OpenPlatformGuide,
-      onClick: () => {
-        window.open(getMetadata(support.metadata.DocsLink), '_blank')
-        Analytics.handleEvent(WorkbenchEvents.DocumentationOpened)
-      }
-    },
+    ...(docsLink !== ''
+      ? [
+          {
+            icon: DocumentationIcon,
+            title: workbench.string.Documentation,
+            description: workbench.string.OpenPlatformGuide,
+            onClick: () => {
+              window.open(docsLink, '_blank', 'noopener,noreferrer')
+              Analytics.handleEvent(WorkbenchEvents.DocumentationOpened)
+            }
+          }
+        ]
+      : []),
     {
       icon: view.icon.Setting,
       title: setting.string.Settings,
@@ -203,21 +212,27 @@
     </Scroller>
   {/if}
   <div class="footer">
-    <a href={getMetadata(support.metadata.PrivacyPolicyLink)} target="_blank">
-      <Button id="privacy-policy" kind={'ghost'} label={support.string.PrivacyPolicy} stopPropagation={false} />
-    </a>
-    <a href={getMetadata(support.metadata.ReportBugLink)} target="_blank">
-      <Button id="report-a-bug" kind={'primary'} label={support.string.ReportBug} stopPropagation={false} />
-    </a>
-    <a href={getMetadata(support.metadata.SupportLink)} target="_blank">
-      <Button
-        id="contact-us"
-        icon={support.icon.Support}
-        kind={'ghost'}
-        label={support.string.ContactUs}
-        stopPropagation={false}
-      />
-    </a>
+    {#if privacyPolicyLink !== ''}
+      <a href={privacyPolicyLink} target="_blank" rel="noopener noreferrer">
+        <Button id="privacy-policy" kind={'ghost'} label={support.string.PrivacyPolicy} stopPropagation={false} />
+      </a>
+    {/if}
+    {#if reportBugLink !== ''}
+      <a href={reportBugLink} target="_blank" rel="noopener noreferrer">
+        <Button id="report-a-bug" kind={'primary'} label={support.string.ReportBug} stopPropagation={false} />
+      </a>
+    {/if}
+    {#if supportLink !== ''}
+      <a href={supportLink} target="_blank" rel="noopener noreferrer">
+        <Button
+          id="contact-us"
+          icon={support.icon.Support}
+          kind={'ghost'}
+          label={support.string.ContactUs}
+          stopPropagation={false}
+        />
+      </a>
+    {/if}
   </div>
 </div>
 

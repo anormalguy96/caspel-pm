@@ -72,9 +72,9 @@
 
   let selectedFile: Blob | undefined = file
 
-  let hasGravatar = false
   async function updateHasGravatar (email?: string) {
-    hasGravatar = !!email && (await checkHasGravatar(buildGravatarId(email)))
+    // Caspel PM: Disable automatic external Gravatar lookup to protect employee email privacy
+    hasGravatar = false
   }
   $: updateHasGravatar(email)
 

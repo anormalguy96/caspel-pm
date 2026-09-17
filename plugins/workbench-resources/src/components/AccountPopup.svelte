@@ -212,14 +212,17 @@
           group: 'end'
         })
       }
-      actions.push({
-        icon: setting.icon.InviteWorkspace,
-        label: view.string.ReadOnlySignUp,
-        action: async () => {
-          open(getMetadata(presentation.metadata.SignupUrl))
-        },
-        group: 'end'
-      })
+      const signupUrl = getMetadata(presentation.metadata.SignupUrl) ?? ''
+      if (signupUrl !== '') {
+        actions.push({
+          icon: setting.icon.InviteWorkspace,
+          label: view.string.ReadOnlySignUp,
+          action: async () => {
+            open(signupUrl)
+          },
+          group: 'end'
+        })
+      }
     }
 
     actions.push({

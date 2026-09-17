@@ -45,19 +45,12 @@
   import LoginIcon from './icons/LoginIcon.svelte'
   import { Pages, getAccount, pages } from '..'
   import login from '../plugin'
-
-  import loginBack from '../../img/login_back.png'
-  import loginBack2x from '../../img/login_back_2x.png'
-  import loginBackAvif from '../../img/login_back.avif'
-  import loginBack2xAvif from '../../img/login_back_2x.avif'
-  import loginBackWebp from '../../img/login_back.webp'
-  import loginBack2xWebp from '../../img/login_back_2x.webp'
   import AdminWorkspaces from './AdminWorkspaces.svelte'
   import ChangePassword from './ChangePassword.svelte'
 
-  export let page: Pages = 'signup'
+  export let page: Pages = 'login'
 
-  const signUpDisabled = getMetadata(login.metadata.DisableSignUp) ?? false
+  const signUpDisabled = true
   const localLoginHidden = getMetadata(login.metadata.HideLocalLogin) ?? false
   const useOTP = getMetadata(presentation.metadata.MailUrl) != null && getMetadata(presentation.metadata.MailUrl) !== ''
   let navigateUrl: string | undefined
@@ -67,14 +60,15 @@
 
   function updatePageLoc (loc: Location): void {
     const token = getMetadata(presentation.metadata.Token)
-    page = (loc.path[1] as Pages) ?? (token != null ? 'selectWorkspace' : 'login')
+    const rawPage = loc.path[1] as Pages
+    // Caspel PM: public self-registration is disabled. Redirect signup to login.
+    page = (rawPage === 'signup' ? 'login' : rawPage) ?? (token != null ? 'selectWorkspace' : 'login')
     if (page === 'join' && loc.query?.autoJoin !== undefined) {
       page = 'autoJoin'
     }
 
     const allowedUnauthPages: Pages[] = [
       'login',
-      'signup',
       'password',
       'recovery',
       'join',
@@ -85,8 +79,7 @@
       'tfa'
     ]
     if (token === undefined ? !allowedUnauthPages.includes(page) : !pages.includes(page)) {
-      const account = fetchMetadataLocalStorage(login.metadata.LastAccount)
-      page = account != null ? 'login' : 'signup'
+      page = 'login'
     }
 
     navigateUrl = loc.query?.navigateUrl ?? undefined
@@ -131,18 +124,8 @@
     class:white={!$themeStore.dark}
   >
     <div class="bg-image clear-mins" class:back={$deviceInfo.docWidth > 768} class:p-4={$deviceInfo.docWidth > 768}>
-      <picture>
-        <source srcset={`${loginBackAvif}, ${loginBack2xAvif} 2x`} type="image/avif" />
-        <source srcset={`${loginBackWebp}, ${loginBack2xWebp} 2x`} type="image/webp" />
-
-        <img
-          class="back-image"
-          src={loginBack}
-          style:display={$deviceInfo.docWidth <= 768 ? 'none' : 'block'}
-          srcset={`${loginBack} 1x, ${loginBack2x} 2x`}
-          alt=""
-        />
-      </picture>
+      <!-- Caspel PM: upstream login artwork replaced by a neutral navy backdrop until approved artwork exists. -->
+      <div class="back-image" style:display={$deviceInfo.docWidth <= 768 ? 'none' : 'block'} aria-hidden="true" />
 
       <div
         style:position="fixed"
@@ -163,7 +146,11 @@
                 <LoginForm {navigateUrl} {signUpDisabled} {useOTP} />
               {/if}
             {:else if page === 'signup'}
-              <SignupForm {navigateUrl} {signUpDisabled} {localLoginHidden} {useOTP} />
+              {#if localLoginHidden}
+                <ProvidersOnlyForm />
+              {:else}
+                <LoginForm {navigateUrl} {signUpDisabled} {useOTP} />
+              {/if}
             {:else if page === 'createWorkspace'}
               <CreateWorkspaceForm />
             {:else if page === 'password'}
@@ -203,8 +190,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: left top;
+    background: radial-gradient(120% 90% at 85% 10%, #1b4f6b 0%, #0a2a3d 55%, #061a26 100%);
   }
   .backd {
     position: relative;
@@ -217,7 +203,7 @@
       height: 100%;
     }
     &.paneld {
-      background: rgba(45, 50, 160, 0.5);
+      background: rgba(10, 42, 61, 0.5);
 
       .panel-base {
         padding-top: 5rem;
@@ -236,9 +222,9 @@
     height: 100%;
     min-width: 35rem;
     max-width: 41rem;
-    background: rgba(45, 50, 160, 0.5);
+    background: rgba(10, 42, 61, 0.55);
     mix-blend-mode: normal;
-    box-shadow: -30px 1.52px 173.87px #121437;
+    box-shadow: -30px 1.52px 173.87px #041018;
     backdrop-filter: blur(157.855px);
     border-radius: 1rem;
 
@@ -247,7 +233,7 @@
       position: absolute;
       content: '';
       inset: 0;
-      background: radial-gradient(161.92% 96.11% at 11.33% 3.89%, #313d9a 0%, #202669 100%);
+      background: radial-gradient(161.92% 96.11% at 11.33% 3.89%, #15506a 0%, #0a2a3d 100%);
       border-radius: 1rem;
       z-index: -1;
     }
@@ -282,7 +268,7 @@
     position: absolute;
     content: '';
     inset: 0;
-    background: radial-gradient(161.92% 96.11% at 11.33% 3.89%, #313d9a 0%, #202669 100%);
+    background: radial-gradient(161.92% 96.11% at 11.33% 3.89%, #15506a 0%, #0a2a3d 100%);
     z-index: -1;
   }
   .panel::after {

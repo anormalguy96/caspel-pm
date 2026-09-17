@@ -159,7 +159,21 @@ export async function loginAsGuest (
   branding: Branding | null,
   token: string
 ): Promise<LoginInfo> {
-  const guestPerson = await db.person.findOne({ uuid: readOnlyGuestAccountUuid as PersonUuid })
+  let guestPerson = await db.person.findOne({ uuid: readOnlyGuestAccountUuid as PersonUuid })
+  if (guestPerson == null && typeof db.person.insertOne === 'function') {
+    try {
+      await db.person.insertOne({
+        uuid: readOnlyGuestAccountUuid as PersonUuid,
+        firstName: 'Anonymous',
+        lastName: 'Guest'
+      })
+      await createAccount(db, readOnlyGuestAccountUuid as PersonUuid, true)
+      guestPerson = await db.person.findOne({ uuid: readOnlyGuestAccountUuid as PersonUuid })
+    } catch (err) {
+      // In case of race condition or error, attempt findOne again
+      guestPerson = await db.person.findOne({ uuid: readOnlyGuestAccountUuid as PersonUuid })
+    }
+  }
   if (guestPerson == null) {
     throw new PlatformError(new Status(Severity.ERROR, platform.status.AccountNotFound, {}))
   }
@@ -314,6 +328,10 @@ export async function signUp (
 ): Promise<LoginInfo> {
   const { email, password, firstName, lastName } = params
 
+  if (process.env.DISABLE_SIGNUP === 'true') {
+    throw new PlatformError(new Status(Severity.ERROR, platform.status.Forbidden, { message: 'Public sign up is disabled' }))
+  }
+
   if (email == null || password == null || firstName == null || email === '' || password === '' || firstName === '') {
     throw new PlatformError(new Status(Severity.ERROR, platform.status.BadRequest, {}))
   }
@@ -357,6 +375,10 @@ export async function signUpOtp (
   }
 ): Promise<OtpInfo> {
   const { email, firstName, lastName } = params
+
+  if (process.env.DISABLE_SIGNUP === 'true') {
+    throw new PlatformError(new Status(Severity.ERROR, platform.status.Forbidden, { message: 'Public sign up is disabled' }))
+  }
 
   if (email == null || firstName == null || email === '' || firstName === '') {
     throw new PlatformError(new Status(Severity.ERROR, platform.status.BadRequest, {}))
@@ -1835,7 +1857,7 @@ export async function generate2faSecret (
   }
 
   const secret = generateTotpSecret()
-  const app = branding?.title ?? getMetadata(accountPlugin.metadata.ProductName) ?? 'Huly'
+  const app = branding?.title ?? getMetadata(accountPlugin.metadata.ProductName) ?? 'Caspel PM'
   const url = getTotpUrl(emailSocialId.value, app, secret)
 
   return { secret, url }

@@ -21,9 +21,8 @@
   import { goTo, requestPassword } from '../utils'
   import Form from './Form.svelte'
   import { BottomAction } from '..'
-  import { signUpAction } from '../actions'
 
-  export let signUpDisabled = false
+  export let signUpDisabled = true
 
   const fields = [{ id: 'email', name: 'username', i18n: login.string.Email }]
   const object = {
@@ -64,8 +63,7 @@
       func: () => {
         goTo('login')
       }
-    },
-    ...(signUpDisabled ? [] : [signUpAction])
+    }
   ]
 </script>
 
