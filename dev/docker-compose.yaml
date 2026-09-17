@@ -270,6 +270,8 @@ services:
     ports:
       - 8087:8080
       - 8088:8080
+    volumes:
+      - ./prod/dist:/app/dist
     environment:
       - SERVER_PORT=8080
       - SERVER_SECRET=secret
