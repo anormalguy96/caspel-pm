@@ -50,12 +50,19 @@ async function main() {
     console.log('Replaced 3-stripe SVG in 29614 with authentic Caspel logo');
   }
 
-  // B. Hide the duplicate text span: (0,r.CFu)(c,"class","fs-title ml-2")
+  // B. Option C Header: Set span text to "PM" with bold green styling
+  const oldSpanText = 'c=(0,r.ND4)("span"),c.textContent=`${(0,l.getMetadata)(A.default.metadata.PlatformTitle)}`';
+  const newSpanText = 'c=(0,r.ND4)("span"),c.textContent="PM"';
+  if (js29614.includes(oldSpanText)) {
+    js29614 = js29614.replaceAll(oldSpanText, () => newSpanText);
+    console.log('Set span text to PM in 29614');
+  }
+
   const oldSpanClass = '(0,r.CFu)(c,"class","fs-title ml-2")';
-  const newSpanClass = '(0,r.CFu)(c,"class","fs-title ml-2"),(0,r.hgi)(c,"display","none")';
+  const newSpanClass = '(0,r.CFu)(c,"class","fs-title ml-2"),(0,r.CFu)(c,"style","font-weight:700;font-size:1.15rem;color:#4CAF50;letter-spacing:1px;vertical-align:middle;")';
   if (js29614.includes(oldSpanClass)) {
     js29614 = js29614.replaceAll(oldSpanClass, () => newSpanClass);
-    console.log('Hidden fs-title ml-2 span in 29614');
+    console.log('Added green PM style to fs-title ml-2 span in 29614');
   }
 
   // C. Eradicate Sign Up tab: replace tn(e) and nn(e)
@@ -85,6 +92,21 @@ async function main() {
   if (js81373.includes(oldSvgH)) {
     js81373 = js81373.replaceAll(oldSvgH, () => newImgH);
     console.log('Replaced 3-stripe SVG in 81373 with authentic Caspel logo');
+  }
+
+  // Option C Header: Set span text to "PM" with bold green styling
+  const old81373SpanText = 'u=(0,o.ND4)("span"),u.textContent=`${(0,s.getMetadata)(l.default.metadata.PlatformTitle)}`';
+  const new81373SpanText = 'u=(0,o.ND4)("span"),u.textContent="PM"';
+  if (js81373.includes(old81373SpanText)) {
+    js81373 = js81373.replaceAll(old81373SpanText, () => new81373SpanText);
+    console.log('Set span text to PM in 81373');
+  }
+
+  const old81373SpanClass = '(0,o.CFu)(u,"class","fs-title ml-2")';
+  const new81373SpanClass = '(0,o.CFu)(u,"class","fs-title ml-2"),(0,o.CFu)(u,"style","font-weight:700;font-size:1.15rem;color:#4CAF50;letter-spacing:1px;vertical-align:middle;")';
+  if (js81373.includes(old81373SpanClass)) {
+    js81373 = js81373.replaceAll(old81373SpanClass, () => new81373SpanClass);
+    console.log('Added green PM style to fs-title ml-2 span in 81373');
   }
 
   const p81373 = path.join(root, 'dev/prod/dist/81373.a2dc27c3c90c4ba900b1.js');
