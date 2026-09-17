@@ -1,3 +1,8 @@
+> [!NOTE]
+> **This repository is the Caspel PM fork of the open-source Huly Platform (EPL-2.0).**
+> Caspel PM customizations, decisions, exceptions and open blockers are documented in [docs/caspel-pm/](docs/caspel-pm/README.md).
+> The upstream README below is kept unchanged for build and architecture reference; its support and community links point to the upstream project, not to Caspel PM support.
+
 # Huly Platform
 
 [![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/huly_io?style=for-the-badge)](https://x.com/huly_io)

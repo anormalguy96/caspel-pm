@@ -115,3 +115,5 @@ dev/tool/history.json
 ws-tests/docker-compose.override.yml
 .cursor/*
 CLAUDE.md
+output.txt
+CASPEL_PM_MASTER_AGENT_PROMPT.md
