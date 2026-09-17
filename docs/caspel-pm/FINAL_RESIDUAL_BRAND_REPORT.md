@@ -39,7 +39,7 @@ Proof the guard detects regressions: run against the pre-change `plugins/support
 | USER_FACING, accepted interoperability | "Huly Unified Format" export label | E-010 (review) |
 | USER_FACING, admin link to upstream guide | Backup restore guide | E-024 (review) |
 | USER_FACING asset still shown | `contact.icon.Huly` sprite glyph | **resolved**: neutral mark in `icons.svg` (E-029), authentic mark masters integrated (B-004) |
-| USER_FACING, external content | GitHub backlink text `Huly®:` | E-030 (review; `LINK_TEXT` env) |
+| USER_FACING, external content | GitHub backlink text | **resolved**: defaults to `Caspel PM:` with `LINK_TEXT` env override |
 | USER_FACING, out of scope | Desktop app | E-040 (B-008) |
 | USER_FACING, outside repository | Workspace init scripts ("Welcome to Huly!" issues) | **resolved**, explicit init script selection (B-023) |
 
@@ -48,7 +48,7 @@ Proof the guard detects regressions: run against the pre-change `plugins/support
 1. Built-in account identity glyph: **replaced** (E-029).
 2. Upstream onboarding seed: **fixed**; no seeding unless named, Caspel starter set runtime-verified (WORKSPACE_SEED_SPEC.md).
 3. Desktop identity: out of first-release scope (B-008).
-4. Authentic Caspel brand asset suite integrated (`?v=3`; B-004 resolved).
+4. Authentic Caspel brand asset suite integrated (`?v=4`; B-004 resolved).
 5. "HULY" calendar name only on workspaces migrated by upstream before the fork (E-027).
 6. Runtime-verified: no Huly title/icon/text on first paint or web surfaces; public sign-up disabled; deep Appearance settings active; 0 external requests. Not verified: native desktop app, production push.
 

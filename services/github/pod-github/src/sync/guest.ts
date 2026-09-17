@@ -8,12 +8,12 @@ import { getPublicLink } from '@hcengineering/server-guest-resources'
 import { Task } from '@hcengineering/task'
 import { generateToken } from '@hcengineering/server-token'
 
-const githubLinkText = process.env.LINK_TEXT ?? 'Huly&reg;:'
+const githubLinkText = process.env.LINK_TEXT ?? 'Caspel PM:'
 
 const githubLinkTextOld = 'View in Huly'
 
 export function hasHulyLinkText (text: string): boolean {
-  return text.includes(githubLinkText) || text.includes(githubLinkTextOld)
+  return text.includes(githubLinkText) || text.includes(githubLinkTextOld) || text.includes('Huly&reg;:')
 }
 
 export function hasHulyLink (href: string, guestLink: string): boolean {

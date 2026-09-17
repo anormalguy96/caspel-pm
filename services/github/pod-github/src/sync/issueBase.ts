@@ -811,7 +811,7 @@ export abstract class IssueSyncManagerBase {
         repo: repository.name,
         issue_number: external.number,
 
-        body: `<p>Connected to <b><a href="${publicLink}">Huly&reg;: ${(object as Task).identifier}</a></b></p>`,
+        body: `<p>Connected to <b><a href="${publicLink}">${process.env.LINK_TEXT ?? 'Caspel PM:'} ${(object as Task).identifier}</a></b></p>`,
         headers: {
           'X-GitHub-Api-Version': '2022-11-28'
         }

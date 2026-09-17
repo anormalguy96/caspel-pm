@@ -354,7 +354,7 @@ export async function compactBackup (
 ): Promise<void> {
   console.log('starting backup compaction')
 
-  const tmpRoot = mkdtempSync('huly')
+  const tmpRoot = mkdtempSync('caspel-pm-')
 
   try {
     let backupInfo: BackupInfo

@@ -9,9 +9,9 @@
 | README | Upstream README kept; fork notice added stating Caspel PM is a fork of the open-source Huly Platform under EPL-2.0 |
 | Email footers "© Caspel PM — All rights reserved" | Refers to the email/product identity, not the source code. **Legal review required** (B-012) |
 | "Caspel PM’s use and transfer of information received from Google APIs…" | Legal disclosure now names Caspel PM. Only valid if Caspel operates its own Google OAuth app. **Legal review required** (B-012) |
-| Fonts | IBM Plex Sans (IBM, SIL OFL 1.1) and Noto Color Emoji (Google, OFL 1.1) bundled upstream. **No OFL licence text next to the font files in `packages/theme/fonts`.** Add `OFL.txt` before distributing builds (recommended; not done, as the prompt asks not to alter upstream licensing without review) |
+| Fonts | IBM Plex Sans (IBM, SIL OFL 1.1) and Noto Color Emoji (Google, OFL 1.1) bundled upstream. SIL OFL 1.1 license file provided at `packages/theme/fonts/complete/OFL.txt`. |
 | Gilroy | Not bundled |
-| Caspel logo | Not used (no approved files); placeholder mark only |
+| Caspel logo | Authentic Caspel master assets provided in `logos/` (`caspel_logo_no_bg-recolored.png`, `1705927011_caspel.png`, `footer_logo_*.png`) and integrated into `dev/prod/public/caspel-pm/`, `dev/prod/dist/caspel-pm/`, `LoginIcon`, and `OnboardIcon`. |
 | Third-party notices for npm dependencies | Not generated. Recommend a licence report from the production bundle (e.g. `license-checker`) as part of release |
 
 EPL-2.0 obligations to confirm with legal before distribution: availability of Source Code for modified files (this fork's repository), retention of notices, and no removal of copyright statements. None were removed.
