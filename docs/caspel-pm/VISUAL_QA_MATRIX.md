@@ -1,6 +1,6 @@
 # Visual QA matrix
 
-Legend: ⬜ not run · ✅ pass · ❌ fail. 
+Legend: ⬜ not run · ✅ pass · ❌ fail.
 
 **2026-09-16 local run: results are recorded in [RUNTIME_QA_REPORT.md](RUNTIME_QA_REPORT.md) (Visual QA).** Covered: first paint, login, invalid login, recovery, signup, create workspace, workbench, tracker, issue detail, documents/editor, inbox, help popup, settings (calendar, backup), dark theme. The matrix below remains the template for owner design review (B-017); 200% zoom, mobile and empty/permission states are still ⬜.
 

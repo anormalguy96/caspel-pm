@@ -1,7 +1,7 @@
 # Caspel PM deep implementation and delivery plan
 
-**Prepared:** 2026-09-17  
-**Target:** same-day, testable web-edition delivery candidate  
+**Prepared:** 2026-09-17
+**Target:** same-day, testable web-edition delivery candidate
 **Production status:** blocked until the production gates in this document are closed
 
 ## 1. Outcome and delivery contract
@@ -379,4 +379,3 @@ The following must be closed after or alongside the same-day candidate before pr
 - production configuration contains no upstream service dependency unless approved;
 - monitoring, rollback and ownership are operational;
 - the final delivery report accurately says production-ready.
-

@@ -1,10 +1,10 @@
 # Caspel PM: Staging and Release Manifest
 
-**Date:** 2026-09-17  
-**Branch:** `delivery/caspel-pm-web-rc1`  
-**Base commit:** `63e28dc96483967b2fc21c881b3f1023c1de7718` (`develop`, `s0.7.327-474`)  
-**Remote:** `origin https://github.com/anormalguy96/caspel-pm.git`  
-**Submodules:** 0 submodules  
+**Date:** 2026-09-17
+**Branch:** `delivery/caspel-pm-web-rc1`
+**Base commit:** `63e28dc96483967b2fc21c881b3f1023c1de7718` (`develop`, `s0.7.327-474`)
+**Remote:** `origin https://github.com/anormalguy96/caspel-pm.git`
+**Submodules:** 0 submodules
 **Status:** Worktree frozen and protected under release candidate branch
 
 ---
