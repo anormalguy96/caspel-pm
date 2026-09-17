@@ -1,6 +1,6 @@
 {
   "huly.local:8080": {
-    "title": "Huly",
+    "title": "Caspel PM",
     "languages": "en,ru,pl,pt,pt-br,es,zh,fr,de,ja,ko,tr",
     "defaultLanguage": "en",
     "defaultApplication": "tracker",
@@ -10,26 +10,27 @@
     "links": [
       {
         "rel": "manifest",
-        "href": "/huly/site.webmanifest"
+        "href": "/caspel-pm/site.webmanifest?v=3"
       },
       {
         "rel": "icon",
-        "href": "/huly/favicon.svg",
-        "type": "image/svg+xml"
-      },
-      {
-        "rel": "shortcut icon",
-        "href": "/huly/favicon.ico",
+        "href": "/caspel-pm/favicon.svg?v=3",
+        "type": "image/svg+xml",
         "sizes": "any"
       },
       {
+        "rel": "shortcut icon",
+        "href": "/caspel-pm/favicon.ico?v=3",
+        "sizes": "16x16 32x32 48x48"
+      },
+      {
         "rel": "apple-touch-icon",
-        "href": "/huly/apple-touch-icon.png"
+        "href": "/caspel-pm/apple-touch-icon.png?v=3"
       }
     ]
   },
   "huly.local:8087": {
-    "title": "Huly",
+    "title": "Caspel PM",
     "languages": "en,ru,pl,pt,pt-br,es,zh,fr,de,ja,ko,tr",
     "defaultLanguage": "en",
     "defaultApplication": "tracker",
@@ -39,21 +40,22 @@
     "links": [
       {
         "rel": "manifest",
-        "href": "/huly/site.webmanifest"
+        "href": "/caspel-pm/site.webmanifest?v=3"
       },
       {
         "rel": "icon",
-        "href": "/huly/favicon.svg",
-        "type": "image/svg+xml"
-      },
-      {
-        "rel": "shortcut icon",
-        "href": "/huly/favicon.ico",
+        "href": "/caspel-pm/favicon.svg?v=3",
+        "type": "image/svg+xml",
         "sizes": "any"
       },
       {
+        "rel": "shortcut icon",
+        "href": "/caspel-pm/favicon.ico?v=3",
+        "sizes": "16x16 32x32 48x48"
+      },
+      {
         "rel": "apple-touch-icon",
-        "href": "/huly/apple-touch-icon.png"
+        "href": "/caspel-pm/apple-touch-icon.png?v=3"
       }
     ]
   },
@@ -98,6 +100,75 @@
     ]
   },
   "huly.local:8088": {
+    "title": "TraceX",
+    "languages": "en",
+    "defaultLanguage": "en",
+    "defaultApplication": "documents",
+    "defaultSpace": "documents:space:QualityDocuments",
+    "defaultSpecial": "",
+    "links": [
+      {
+        "rel": "shortcut icon",
+        "type": "image/x-icon",
+        "href": "/tracex/favicon.ico"
+      },
+      {
+        "rel": "icon",
+        "type": "image/svg+xml",
+        "sizes": "any",
+        "href": "/tracex/favicon.svg"
+      },
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "16x16",
+        "href": "/tracex/favicon_16.png"
+      },
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "32x32",
+        "href": "/tracex/favicon_32.png"
+      },
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "192x192",
+        "href": "/tracex/favicon_192.png"
+      }
+    ]
+  },
+  "host.docker.internal:8087": {
+    "title": "Caspel PM",
+    "languages": "en,ru,pl,pt,pt-br,es,zh,fr,de,ja,ko,tr",
+    "defaultLanguage": "en",
+    "defaultApplication": "tracker",
+    "defaultSpace": "tracker:project:DefaultProject",
+    "defaultSpecial": "issues",
+    "lastNameFirst": "true",
+    "links": [
+      {
+        "rel": "manifest",
+        "href": "/caspel-pm/site.webmanifest?v=3"
+      },
+      {
+        "rel": "icon",
+        "href": "/caspel-pm/favicon.svg?v=3",
+        "type": "image/svg+xml",
+        "sizes": "any"
+      },
+      {
+        "rel": "shortcut icon",
+        "href": "/caspel-pm/favicon.ico?v=3",
+        "sizes": "16x16 32x32 48x48"
+      },
+      {
+        "rel": "apple-touch-icon",
+        "href": "/caspel-pm/apple-touch-icon.png?v=3"
+      }
+    ]
+  },
+  "host.docker.internal:8088": {
     "title": "TraceX",
     "languages": "en",
     "defaultLanguage": "en",

@@ -219,6 +219,8 @@ export interface Branding {
     reportBugLink?: string
     docsLink?: string
     privacyPolicyLink?: string
+    // Caspel PM: product backup & restore guide shown on Settings > Backup (hidden when unset)
+    backupRestoreGuideLink?: string
   }
   languages?: string
   lastNameFirst?: string
@@ -440,7 +442,7 @@ export async function configurePlatform() {
   console.log('loading configuration', config)
   console.log('loaded branding', myBranding)
 
-  const title = myBranding.title ?? 'Platform'
+  const title = myBranding.title ?? 'Caspel PM'
 
   // apply branding
   window.document.title = title
@@ -490,7 +492,7 @@ export async function configurePlatform() {
   setMetadata(presentation.metadata.StatsUrl, config.STATS_URL)
   setMetadata(presentation.metadata.LinkPreviewUrl, config.LINK_PREVIEW_URL)
   setMetadata(presentation.metadata.MailUrl, config.MAIL_URL)
-  setMetadata(presentation.metadata.SignupUrl, config.SIGNUP_URL ?? 'https://huly.io/signup')
+  setMetadata(presentation.metadata.SignupUrl, config.SIGNUP_URL ?? '')
 
   const disabledFeatures = (config.DISABLED_FEATURES ??'').split(',').map(it => it.trim()).filter(it => it.length > 0)
   setMetadata(presentation.metadata.DisabledFeatures, new Set(disabledFeatures))
@@ -542,6 +544,7 @@ export async function configurePlatform() {
   setMetadata(support.metadata.ReportBugLink, myBranding.support?.reportBugLink ?? reportBugLink)
   setMetadata(support.metadata.DocsLink, myBranding.support?.docsLink ?? docsLink)
   setMetadata(support.metadata.PrivacyPolicyLink, myBranding.support?.privacyPolicyLink ?? privacyPolicyLink)
+  setMetadata(setting.metadata.BackupRestoreGuideUrl, myBranding.support?.backupRestoreGuideLink ?? '')
 
   const languages = myBranding.languages
     ? myBranding.languages.split(',').map((l) => l.trim())

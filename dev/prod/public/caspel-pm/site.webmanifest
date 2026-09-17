@@ -1,0 +1,17 @@
+{
+  "name": "Caspel PM",
+  "short_name": "Caspel PM",
+  "description": "Projects, tasks, documents, and team collaboration.",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0A2A3D",
+  "icons": [
+    { "src": "/caspel-pm/favicon.svg?v=3", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/caspel-pm/icon-192.png?v=3", "type": "image/png", "sizes": "192x192" },
+    { "src": "/caspel-pm/icon-512.png?v=3", "type": "image/png", "sizes": "512x512" },
+    { "src": "/caspel-pm/icon-1024.png?v=3", "type": "image/png", "sizes": "1024x1024" },
+    { "src": "/caspel-pm/icon-maskable-512.png?v=3", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+  ],
+  "start_url": "/",
+  "scope": "/"
+}

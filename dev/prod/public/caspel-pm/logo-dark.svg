@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" role="img" aria-label="Caspel PM">
+  <!-- PROVISIONAL placeholder wordmark for dark backgrounds. Not the official Caspel logo. -->
+  <rect width="64" height="64" rx="14" fill="#FFFFFF"/>
+  <rect x="14" y="16" width="10" height="32" rx="3" fill="#0A2A3D"/>
+  <rect x="27" y="16" width="10" height="22" rx="3" fill="#0A2A3D"/>
+  <rect x="40" y="16" width="10" height="14" rx="3" fill="#4CAF50"/>
+  <text x="78" y="42" font-family="'IBM Plex Sans', 'Segoe UI', Arial, sans-serif" font-size="26" font-weight="600" fill="#FFFFFF">Caspel PM</text>
+</svg>
