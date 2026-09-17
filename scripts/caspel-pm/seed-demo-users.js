@@ -85,12 +85,12 @@ async function main() {
     WHERE uuid = '49081784-6001-4076-b4b1-0b5c0023f4d4';
 
     INSERT INTO global_account.workspace_members (workspace_uuid, account_uuid, role)
-    VALUES ('3b8b8eae-3cee-4551-a858-f34aea83edfc', '${GUEST_UUID}', 'READONLYGUEST')
-    ON CONFLICT (workspace_uuid, account_uuid) DO NOTHING;
+    VALUES ('3b8b8eae-3cee-4551-a858-f34aea83edfc', '${GUEST_UUID}', 'GUEST')
+    ON CONFLICT (workspace_uuid, account_uuid) DO UPDATE SET role = 'GUEST';
 
     INSERT INTO global_account.workspace_members (workspace_uuid, account_uuid, role)
-    VALUES ('49081784-6001-4076-b4b1-0b5c0023f4d4', '${GUEST_UUID}', 'READONLYGUEST')
-    ON CONFLICT (workspace_uuid, account_uuid) DO NOTHING;
+    VALUES ('49081784-6001-4076-b4b1-0b5c0023f4d4', '${GUEST_UUID}', 'GUEST')
+    ON CONFLICT (workspace_uuid, account_uuid) DO UPDATE SET role = 'GUEST';
   `);
 
   // 2. Provision the 4 demo users
