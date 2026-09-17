@@ -31,10 +31,15 @@
   const densityContext = getContext<{ currentDensity: Writable<string>, setDensity: (density: string) => void }>('density')
   const motionContext = getContext<{ currentMotion: Writable<string>, setMotion: (motion: string) => void }>('motion')
 
-  $: currentThemeVal = themeContext?.currentTheme ? $themeContext.currentTheme : getCurrentTheme()
-  $: currentFontVal = fontContext?.currentFontSize ? $fontContext.currentFontSize : getCurrentFontSize()
-  $: currentDensityVal = densityContext?.currentDensity ? $densityContext.currentDensity : getCurrentDensity()
-  $: currentMotionVal = motionContext?.currentMotion ? $motionContext.currentMotion : getCurrentMotion()
+  $: themeStore = themeContext?.currentTheme
+  $: fontStore = fontContext?.currentFontSize
+  $: densityStore = densityContext?.currentDensity
+  $: motionStore = motionContext?.currentMotion
+
+  $: currentThemeVal = themeStore ? $themeStore : getCurrentTheme()
+  $: currentFontVal = fontStore ? $fontStore : getCurrentFontSize()
+  $: currentDensityVal = densityStore ? $densityStore : getCurrentDensity()
+  $: currentMotionVal = motionStore ? $motionStore : getCurrentMotion()
 
   const themes = [
     {
