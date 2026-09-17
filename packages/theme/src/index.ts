@@ -65,6 +65,16 @@ export const getCurrentLanguage = (): string => {
 /**
  * @public
  */
+export const getCurrentDensity = (): string =>
+  localStorage.getItem('density') ?? getDefaultProps('density', 'density-comfortable')
+/**
+ * @public
+ */
+export const getCurrentMotion = (): string =>
+  localStorage.getItem('motion') ?? getDefaultProps('motion', 'motion-system')
+/**
+ * @public
+ */
 export const getCurrentEmoji = (): string => localStorage.getItem('emoji') ?? getDefaultProps('emoji', 'emoji-system')
 
 export class ThemeOptions {

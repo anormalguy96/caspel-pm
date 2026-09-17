@@ -23,6 +23,8 @@
     getCurrentFontSize,
     getCurrentLanguage,
     getCurrentTheme,
+    getCurrentDensity,
+    getCurrentMotion,
     isSystemThemeDark,
     isThemeDark,
     themeStore as themeOptions,
@@ -31,36 +33,58 @@
 
   const currentTheme = writable<string>(getCurrentTheme())
   const currentFontSize = writable<string>(getCurrentFontSize())
+  const currentDensity = writable<string>(getCurrentDensity())
+  const currentMotion = writable<string>(getCurrentMotion())
   const currentLanguage = writable<string>(getCurrentLanguage())
   const currentEmoji = writable<string>(getCurrentEmoji())
 
   const setOptions = (currentFont: string, theme: string, language: string, emoji: string) => {
-    themeOptions.set(new ThemeOptions(currentFont === 'normal-font' ? 16 : 14, isThemeDark(theme), language, emoji))
+    themeOptions.set(new ThemeOptions(currentFont === 'compact-font' ? 13 : currentFont === 'comfortable-font' ? 16 : currentFont === 'large-font' ? 18 : 15, isThemeDark(theme), language, emoji))
   }
 
   const getRealTheme = (theme: string): string => (isThemeDark(theme) ? ThemeVariant.Dark : ThemeVariant.Light)
+
+  const updateDocumentClasses = (theme: string, font: string, density: string, motion: string, emoji: string) => {
+    document.documentElement.setAttribute(
+      'class',
+      `${getRealTheme(theme)} ${font} ${density} ${motion} ${emoji}`
+    )
+  }
+
   const setRootColors = (theme: string, set = true) => {
     currentTheme.set(theme)
     if (set) {
       localStorage.setItem('theme', theme)
     }
-    document.documentElement.setAttribute(
-      'class',
-      `${getRealTheme(theme)} ${getCurrentFontSize()} ${getCurrentEmoji()}`
-    )
-    setOptions(getCurrentFontSize(), theme, getCurrentLanguage(), getCurrentEmoji())
+    updateDocumentClasses(theme, $currentFontSize, $currentDensity, $currentMotion, $currentEmoji)
+    setOptions($currentFontSize, theme, $currentLanguage, $currentEmoji)
   }
+
   const setRootFontSize = (fontsize: string, set = true) => {
     currentFontSize.set(fontsize)
     if (set) {
       localStorage.setItem('fontsize', fontsize)
     }
-    document.documentElement.setAttribute(
-      'class',
-      `${getRealTheme(getCurrentTheme())} ${fontsize} ${getCurrentEmoji()}`
-    )
-    setOptions(fontsize, getCurrentTheme(), getCurrentLanguage(), getCurrentEmoji())
+    updateDocumentClasses($currentTheme, fontsize, $currentDensity, $currentMotion, $currentEmoji)
+    setOptions(fontsize, $currentTheme, $currentLanguage, $currentEmoji)
   }
+
+  const setRootDensity = (density: string, set = true) => {
+    currentDensity.set(density)
+    if (set) {
+      localStorage.setItem('density', density)
+    }
+    updateDocumentClasses($currentTheme, $currentFontSize, density, $currentMotion, $currentEmoji)
+  }
+
+  const setRootMotion = (motion: string, set = true) => {
+    currentMotion.set(motion)
+    if (set) {
+      localStorage.setItem('motion', motion)
+    }
+    updateDocumentClasses($currentTheme, $currentFontSize, $currentDensity, motion, $currentEmoji)
+  }
+
   const setLanguage = async (language: string, set: boolean = true) => {
     currentLanguage.set(language)
     if (set) {
@@ -69,18 +93,16 @@
     Analytics.setTag('language', language)
     setMetadata(platform.metadata.locale, $currentLanguage)
     await loadPluginStrings($currentLanguage, set)
-    setOptions(getCurrentFontSize(), getCurrentTheme(), language, getCurrentEmoji())
+    setOptions($currentFontSize, $currentTheme, language, $currentEmoji)
   }
+
   const setEmoji = (emoji: string, set = true) => {
     currentEmoji.set(emoji)
     if (set) {
       localStorage.setItem('emoji', emoji)
     }
-    document.documentElement.setAttribute(
-      'class',
-      `${getRealTheme(getCurrentTheme())} ${getCurrentFontSize()} ${emoji}`
-    )
-    setOptions(getCurrentFontSize(), getCurrentTheme(), getCurrentLanguage(), emoji)
+    updateDocumentClasses($currentTheme, $currentFontSize, $currentDensity, $currentMotion, emoji)
+    setOptions($currentFontSize, $currentTheme, $currentLanguage, emoji)
   }
 
   setContext('theme', {
@@ -90,6 +112,14 @@
   setContext('fontsize', {
     currentFontSize,
     setFontSize: setRootFontSize
+  })
+  setContext('density', {
+    currentDensity,
+    setDensity: setRootDensity
+  })
+  setContext('motion', {
+    currentMotion,
+    setMotion: setRootMotion
   })
   setContext('lang', {
     currentLanguage,
@@ -105,7 +135,7 @@
   function checkSystemTheme (): void {
     const theme = $currentTheme
     if (remove !== null || theme !== 'theme-system') {
-      remove()
+      remove?.()
       remove = null
     }
 
@@ -129,6 +159,8 @@
   onMount(() => {
     setRootColors($currentTheme, false)
     setRootFontSize($currentFontSize, false)
+    setRootDensity($currentDensity, false)
+    setRootMotion($currentMotion, false)
     void setLanguage($currentLanguage, false)
     void loadPluginStrings($currentLanguage)
     setDocumentLanguage()

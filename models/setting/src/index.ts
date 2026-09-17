@@ -199,6 +199,21 @@ export function createModel (builder: Builder): void {
     setting.class.SettingsCategory,
     core.space.Model,
     {
+      name: 'appearance',
+      label: setting.string.Appearance,
+      icon: setting.icon.Setting,
+      component: setting.component.AppearanceSettings,
+      group: 'settings-account',
+      role: AccountRole.Guest,
+      order: 500
+    },
+    setting.ids.Appearance
+  )
+
+  builder.createDoc(
+    setting.class.SettingsCategory,
+    core.space.Model,
+    {
       name: 'password',
       label: setting.string.ChangePassword,
       icon: setting.icon.Password,

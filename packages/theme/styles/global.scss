@@ -16,6 +16,7 @@
 @use "./_vars.scss" as *;
 @use "./_colors.scss" as *;
 @use "./_lumia-colors.scss" as *;
+@use "./_caspel-pm.scss" as *;
 @use "./_layouts.scss" as *;
 @use "./_print.scss" as *;
 @use "./common.scss" as *;
@@ -141,8 +142,67 @@
   margin: 2.5rem;
 }
 
-.normal-font { font-size: 16px; }
-.small-font { font-size: 14px; }
+/* Caspel PM: Semantic font-size scaling across entire interface */
+html.compact-font, .compact-font {
+  font-size: 13px;
+  --body-font-size: 0.8125rem;
+}
+html.small-font, .small-font {
+  font-size: 14px;
+  --body-font-size: 0.84375rem;
+}
+html.normal-font, .normal-font {
+  font-size: 15px;
+  --body-font-size: 0.875rem;
+}
+html.comfortable-font, .comfortable-font {
+  font-size: 16px;
+  --body-font-size: 0.9375rem;
+}
+html.large-font, .large-font {
+  font-size: 18px;
+  --body-font-size: 1rem;
+}
+
+/* Caspel PM: UI Density preferences */
+html.density-compact {
+  --spacing-0_5: 0.2rem;
+  --spacing-1: 0.375rem;
+  --spacing-1_5: 0.55rem;
+  --spacing-2: 0.75rem;
+  --spacing-2_5: 0.95rem;
+  --spacing-3: 1.15rem;
+  --status-bar-height: 30px;
+}
+html.density-comfortable {
+  --spacing-0_5: 0.25rem;
+  --spacing-1: 0.5rem;
+  --spacing-1_5: 0.75rem;
+  --spacing-2: 1rem;
+  --spacing-2_5: 1.25rem;
+  --spacing-3: 1.5rem;
+  --status-bar-height: 36px;
+}
+
+/* Caspel PM: Reduced Motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html:not(.motion-full) *,
+  html:not(.motion-full) *::before,
+  html:not(.motion-full) *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html.motion-reduced *,
+html.motion-reduced *::before,
+html.motion-reduced *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
 
 body {
   -webkit-font-smoothing: antialiased;
