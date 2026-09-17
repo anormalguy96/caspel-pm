@@ -201,7 +201,8 @@ export default plugin(settingId, {
     DisablePermissionsConfiguration: '' as Ref<Configuration>,
     Mailboxes: '' as Ref<Doc>,
     Security: '' as Ref<Doc>,
-    ApiTokens: '' as Ref<Doc>
+    ApiTokens: '' as Ref<Doc>,
+    Appearance: '' as Ref<Doc>
   },
   mixin: {
     Editable: '' as Ref<Mixin<Editable>>,
@@ -248,7 +249,8 @@ export default plugin(settingId, {
     OfficeSettings: '' as AnyComponent,
     UserRoleSelect: '' as AnyComponent,
     TwoFactorSettings: '' as AnyComponent,
-    ApiTokens: '' as AnyComponent
+    ApiTokens: '' as AnyComponent,
+    AppearanceSettings: '' as AnyComponent
   },
   string: {
     Settings: '' as IntlString,
@@ -398,7 +400,27 @@ export default plugin(settingId, {
     ApiEndpointLoadModel: '' as IntlString,
     ApiEndpointAccount: '' as IntlString,
     ApiBaseUrl: '' as IntlString,
-    ApiWorkspaceId: '' as IntlString
+    ApiWorkspaceId: '' as IntlString,
+    Appearance: '' as IntlString,
+    AppearanceDescription: '' as IntlString,
+    Theme: '' as IntlString,
+    ThemeLight: '' as IntlString,
+    ThemeDark: '' as IntlString,
+    ThemeSystem: '' as IntlString,
+    FontSize: '' as IntlString,
+    FontSizeCompact: '' as IntlString,
+    FontSizeDefault: '' as IntlString,
+    FontSizeComfortable: '' as IntlString,
+    FontSizeLarge: '' as IntlString,
+    Density: '' as IntlString,
+    DensityCompact: '' as IntlString,
+    DensityComfortable: '' as IntlString,
+    Motion: '' as IntlString,
+    MotionSystem: '' as IntlString,
+    MotionReduced: '' as IntlString,
+    MotionFull: '' as IntlString,
+    ResetAppearance: '' as IntlString,
+    ResetAppearanceConfirm: '' as IntlString
   },
   icon: {
     AccountSettings: '' as Asset,
@@ -421,7 +443,8 @@ export default plugin(settingId, {
     Mailbox: '' as Asset,
     OfficeSettings: '' as Asset,
     Reset: '' as Asset,
-    ApiToken: '' as Asset
+    ApiToken: '' as Asset,
+    Theme: '' as Asset
   },
   templateFieldCategory: {
     Integration: '' as Ref<TemplateFieldCategory>
@@ -434,6 +457,8 @@ export default plugin(settingId, {
   },
   metadata: {
     BackupUrl: '' as Metadata<string>,
+    // Caspel PM: product-owned backup & restore guide (branding `support.backupRestoreGuideLink`).
+    BackupRestoreGuideUrl: '' as Metadata<string>,
     DefaultInviteRole: '' as Metadata<string | undefined>,
     DefaultInviteLinkGeneratorRoles: '' as Metadata<string[] | undefined>
   },

@@ -1,0 +1,7 @@
+class: tracker:class:Project
+title: Getting started
+identifier: START
+private: false
+autoJoin: true
+description: Starter tasks for setting up Caspel PM in this workspace.
+defaultIssueStatus: Todo

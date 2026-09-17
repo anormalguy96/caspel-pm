@@ -31,6 +31,7 @@ import Privacy from './components/Privacy.svelte'
 import Profile from './components/Profile.svelte'
 import Settings from './components/Settings.svelte'
 import TwoFactorSettings from './components/TwoFactorSettings.svelte'
+import AppearanceSettings from './components/AppearanceSettings.svelte'
 
 import { Analytics } from '@hcengineering/analytics'
 import ClassAttributes from './components/ClassAttributes.svelte'
@@ -175,7 +176,8 @@ export default async (): Promise<Resources> => ({
     EmployeeRefEditor,
     UserRoleSelect,
     TwoFactorSettings,
-    ApiTokens
+    ApiTokens,
+    AppearanceSettings
   },
   actionImpl: {
     DeleteMixin

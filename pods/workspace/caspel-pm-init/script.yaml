@@ -1,0 +1,9 @@
+# Caspel PM starter content for new workspaces.
+# Opt-in only: set INIT_REPO_DIR to this folder and INIT_WORKSPACE=caspel-pm
+# (see docs/caspel-pm/WORKSPACE_SEED_SPEC.md). Never marked default.
+- name: caspel-pm
+  lang: en
+  default: false
+  steps:
+    - type: import
+      path: ./workspace

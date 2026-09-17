@@ -118,7 +118,7 @@ services:
       - redpanda
     restart: unless-stopped
   minio:
-    image: 'minio/minio'
+    image: ${MINIO_IMAGE:-quay.io/minio/minio:RELEASE.2024-09-13T20-26-02Z}
     command: server /data --address ":9000" --console-address ":9001"
     extra_hosts:
       - 'huly.local:host-gateway'
@@ -194,7 +194,7 @@ services:
       # - WS_LIVENESS_DAYS=1
       - ACCOUNTS_URL=http://huly.local:3000
       - BRANDING_PATH=/var/cfg/branding.json
-      # - DISABLE_SIGNUP=true
+      - DISABLE_SIGNUP=true
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4318/v1/traces
       - MAILBOX_DOMAINS=huly.dev.local
       - MAILBOX_MAX_COUNT_PER_ACCOUNT=2
@@ -238,6 +238,9 @@ services:
       - BACKUP_BUCKET=${BACKUP_BUCKET_NAME}
       - MAIL_URL=
       # - INIT_WORKSPACE=staging-dev
+      # Caspel PM starter content (opt-in): see docs/caspel-pm/WORKSPACE_SEED_SPEC.md
+      # - INIT_REPO_DIR=./caspel-pm-init
+      # - INIT_WORKSPACE=caspel-pm
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4318/v1/traces
     restart: unless-stopped
   collaborator:
@@ -285,7 +288,8 @@ services:
       - PRINT_URL=http://huly.local:4005
       - SIGN_URL=http://huly.local:4006
       #      - ANALYTICS_COLLECTOR_URL=http://huly.local:4017
-      - DESKTOP_UPDATES_URL=https://dist.huly.io
+      # Caspel PM: desktop distribution is out of first-release scope; no upstream update feed.
+      - DESKTOP_UPDATES_URL=
       - DESKTOP_UPDATES_CHANNEL=dev
       - DESKTOP_UPDATES_CHANNELS=dev;tracex:dev-tracex
       - BRANDING_URL=http://huly.local:8087/branding.json
@@ -295,7 +299,7 @@ services:
       - BACKUP_URL=http://huly.local:4039/api/backup,
       - EXCLUDED_APPLICATIONS_FOR_ANONYMOUS=[]
       - DISABLED_FEATURES=auto-translate,mailboxes
-      # - DISABLE_SIGNUP=true
+      - DISABLE_SIGNUP=true
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4318/v1/traces
       - PULSE_URL=ws://huly.local:8099/ws
       - DATALAKE_URL=http://huly.local:4030

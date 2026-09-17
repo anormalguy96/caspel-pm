@@ -22,12 +22,15 @@
   import setting from '../plugin'
   import { BackupInfo, BackupSnapshot } from '../types'
   import {
-    backupRestoreGuideLink,
     buildStoreZip,
     collectBackupFileNames,
     generateBackupScript,
-    generateRestoreReadme
+    generateRestoreReadme,
+    productRestoreGuideLink
   } from '../utils/backup'
+
+  // Caspel PM: only a configured product guide is offered in the UI.
+  const restoreGuideLink = productRestoreGuideLink(getMetadata(setting.metadata.BackupRestoreGuideUrl))
 
   let loading = true
 
@@ -187,7 +190,7 @@
 
   function backupArchiveName (): string {
     const date = new Date().toISOString().slice(0, 10)
-    return `huly-backup-${workspaceId}-${date}.zip`
+    return `caspel-pm-backup-${workspaceId}-${date}.zip`
   }
 
   async function downloadFullBackup (): Promise<void> {
@@ -209,8 +212,12 @@
         entries.push({ name, data: new Uint8Array(await response.arrayBuffer()) })
       }
       // Ship restore instructions inside the archive so it can be restored
-      // into any other Huly setup directly.
-      const readme = generateRestoreReadme({ sourceWorkspace: workspaceId, fileCount: entries.length })
+      // into another Caspel PM (or compatible platform) setup directly.
+      const readme = generateRestoreReadme({
+        sourceWorkspace: workspaceId,
+        fileCount: entries.length,
+        guideLink: restoreGuideLink
+      })
       entries.push({ name: 'RESTORE.md', data: new TextEncoder().encode(readme) })
       const zip = buildStoreZip(entries)
       const blob = new Blob([zip], { type: 'application/zip' })
@@ -238,8 +245,12 @@
     const script = generateBackupScript({
       baseUrl: downloadBase,
       files,
-      outDir: `huly-backup-${workspaceId}`,
-      restoreReadme: generateRestoreReadme({ sourceWorkspace: workspaceId, fileCount: files.length })
+      outDir: `caspel-pm-backup-${workspaceId}`,
+      restoreReadme: generateRestoreReadme({
+        sourceWorkspace: workspaceId,
+        fileCount: files.length,
+        guideLink: restoreGuideLink
+      })
     })
     void copyTextToClipboard(script).then(() => {
       scriptCopied = true
@@ -322,22 +333,24 @@
             <Button label={tokenCopied ? view.string.Copied : setting.string.BackupCopyToken} on:click={copyToken} />
           </div>
         </div>
-        <div class="backup-action">
-          <div class="backup-action__text">
-            <div class="backup-action__title">
-              <Label label={setting.string.BackupRestoreGuide} />
+        {#if restoreGuideLink !== ''}
+          <div class="backup-action">
+            <div class="backup-action__text">
+              <div class="backup-action__title">
+                <Label label={setting.string.BackupRestoreGuide} />
+              </div>
+              <div class="backup-action__info">
+                <Label label={setting.string.BackupRestoreGuideInfo} />
+              </div>
             </div>
-            <div class="backup-action__info">
-              <Label label={setting.string.BackupRestoreGuideInfo} />
-            </div>
+            <Button
+              label={setting.string.BackupRestoreGuide}
+              on:click={() => {
+                window.open(restoreGuideLink, '_blank', 'noopener,noreferrer')
+              }}
+            />
           </div>
-          <Button
-            label={setting.string.BackupRestoreGuide}
-            on:click={() => {
-              window.open(backupRestoreGuideLink, '_blank', 'noopener,noreferrer')
-            }}
-          />
-        </div>
+        {/if}
       </div>
 
       <Expandable bordered>

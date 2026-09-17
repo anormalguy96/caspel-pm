@@ -54,6 +54,7 @@ import {
   type StorageAdapter
 } from '@hcengineering/server-core'
 import { type InitScript, WorkspaceInitializer } from './initializer'
+import { selectInitScript } from './initScript'
 import toolPlugin from './plugin'
 import { MigrateClientImpl } from './upgrade'
 
@@ -64,6 +65,7 @@ import path from 'path'
 import { sendTransactorEvent } from './utils'
 
 export * from './connect'
+export * from './initScript'
 export * from './plugin'
 export * from './utils'
 export { toolPlugin as default }
@@ -227,14 +229,9 @@ export async function initializeWorkspace (
     const text = fs.readFileSync(initScriptFile, 'utf8')
     const scripts = yaml.load(text) as any as InitScript[]
 
-    let script: InitScript | undefined
-    if (initWS !== undefined) {
-      script = scripts.find((it) => it.name === initWS)
-    }
+    const script = selectInitScript(scripts, initWS)
     if (script === undefined) {
-      script = scripts.find((it) => it.default)
-    }
-    if (script === undefined) {
+      ctx.info('No init script selected; workspace starts empty', { initWS })
       return
     }
 
