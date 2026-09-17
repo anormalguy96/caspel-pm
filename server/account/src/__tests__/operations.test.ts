@@ -1564,6 +1564,29 @@ describe('account operations', () => {
           new PlatformError(new Status(Severity.ERROR, platform.status.AccountNotFound, {}))
         )
       })
+
+      test('should auto-provision guest account if missing and insertOne is available', async () => {
+        const mockGuestPerson = { uuid: readOnlyGuestAccountUuid }
+        const personWithInsert = {
+          findOne: jest.fn().mockResolvedValueOnce(null).mockResolvedValueOnce(mockGuestPerson),
+          insertOne: jest.fn().mockResolvedValue({})
+        }
+        const dbWithProvisioning = {
+          ...mockDb,
+          person: personWithInsert,
+          account: {
+            ...mockDb.account,
+            insertOne: jest.fn().mockResolvedValue({})
+          }
+        } as unknown as AccountDB
+
+        const result = await loginAsGuest(mockCtx, dbWithProvisioning, mockBranding, mockToken)
+        expect(personWithInsert.insertOne).toHaveBeenCalled()
+        expect(result).toEqual({
+          account: readOnlyGuestAccountUuid,
+          token: expect.any(String)
+        })
+      })
     })
   })
 

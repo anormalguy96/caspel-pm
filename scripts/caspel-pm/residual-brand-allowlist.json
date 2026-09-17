@@ -1,0 +1,41 @@
+{
+  "locale-value": [
+    {
+      "detail": "^ExportUnifiedFormat$",
+      "reason": "Name of the upstream Huly Unified import/export format (interoperability). See IDENTIFIER_EXCEPTION_REGISTER.md E-010."
+    }
+  ],
+  "upstream-url": [
+    {
+      "file": "^dev/prod/public/config-huly\\.json$",
+      "reason": "Upstream hosted-environment developer config (CLIENT_TYPE=dev-huly). Not served to Caspel PM hosts. E-020."
+    },
+    {
+      "file": "^dev/prod/webpack\\.config\\.js$",
+      "reason": "Developer-only proxy targets for the dev-huly client type. E-021."
+    },
+    {
+      "file": "^plugins/setting-resources/src/utils/backup\\.ts$",
+      "detail": "docs/guides/backup-restore\\.en\\.md$",
+      "reason": "Admin-facing upstream backup/restore procedure; no Caspel copy published yet. E-024."
+    },
+    {
+      "file": "^server/account-service/src/index\\.ts$",
+      "detail": "huly-selfhost$",
+      "reason": "Operator startup log pointing to upstream MongoDB migration instructions. E-025."
+    },
+    {
+      "file": "^services/github/pod-github/src/sync/repository\\.ts$",
+      "detail": "github\\.com/hcengineering/uberflow/pull/",
+      "reason": "Example URL inside a code comment; never rendered. E-026."
+    }
+  ],
+  "bare-literal": [
+    {
+      "file": "^models/calendar/src/migration.ts$",
+      "detail": "^'HULY'$",
+      "reason": "Historical data migration that already ran on upstream workspaces; migrations are not rewritten. New calendars use the product title. E-027."
+    }
+  ],
+  "first-paint": []
+}

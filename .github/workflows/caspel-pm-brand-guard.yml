@@ -1,0 +1,20 @@
+name: Caspel PM brand guard
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  residual-brand:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - name: Check for unclassified user-facing upstream branding
+        run: node scripts/caspel-pm/check-residual-brand.js

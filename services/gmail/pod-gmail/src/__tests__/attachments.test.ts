@@ -235,7 +235,7 @@ describe('AttachmentHandler', () => {
       expect(decodedResult).toContain('Test Content')
       expect(decodedResult).toContain('test.txt')
       expect(decodedResult).toContain('Content-Disposition: attachment; filename="test.txt"')
-      expect(decodedResult).toContain('<br><br><p>Sent via <a href="https://huly.io">Huly</a></p>')
+      expect(decodedResult).toContain('<br><br><p>Sent via Caspel PM</p>')
     })
   })
 })

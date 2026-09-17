@@ -19,7 +19,8 @@ import {
   collectBackupFileNames,
   crc32,
   generateBackupScript,
-  generateRestoreReadme
+  generateRestoreReadme,
+  productRestoreGuideLink
 } from '../utils/backup'
 
 describe('collectBackupFileNames', () => {
@@ -124,6 +125,36 @@ describe('generateRestoreReadme', () => {
 
   it('links to the full backup & restore guide', () => {
     expect(readme).toContain(backupRestoreGuideLink)
+  })
+
+  it('labels the fallback guide as upstream technical documentation', () => {
+    expect(readme).toContain('Upstream technical reference')
+    expect(readme).toContain('# Restoring this Caspel PM backup')
+  })
+
+  it('uses a configured product guide instead of the upstream reference', () => {
+    const custom = generateRestoreReadme({
+      sourceWorkspace: 'ws',
+      fileCount: 1,
+      guideLink: 'https://docs.example.com/restore'
+    })
+    expect(custom).toContain('Full guide, including troubleshooting: https://docs.example.com/restore')
+    expect(custom).not.toContain(backupRestoreGuideLink)
+  })
+
+  it('ignores a configured guide with a non-http scheme', () => {
+    const custom = generateRestoreReadme({ sourceWorkspace: 'ws', fileCount: 1, guideLink: 'javascript:alert(1)' })
+    expect(custom).not.toContain('javascript:')
+    expect(custom).toContain(backupRestoreGuideLink)
+  })
+})
+
+describe('productRestoreGuideLink', () => {
+  it('accepts only absolute http(s) links', () => {
+    expect(productRestoreGuideLink(undefined)).toBe('')
+    expect(productRestoreGuideLink('')).toBe('')
+    expect(productRestoreGuideLink('/docs')).toBe('')
+    expect(productRestoreGuideLink(' https://docs.example.com/r ')).toBe('https://docs.example.com/r')
   })
 })
 
