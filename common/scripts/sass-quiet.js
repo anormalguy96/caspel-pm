@@ -26,6 +26,12 @@ if (!process.stderr._originalWrite) {
   };
 }
 
-const sass = require('sass');
+let sass;
+try {
+  sass = require('sass');
+} catch (e) {
+  const sassPath = require.resolve('sass', { paths: [process.cwd(), __dirname] });
+  sass = require(sassPath);
+}
 
 module.exports = sass;

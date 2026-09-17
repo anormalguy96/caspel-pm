@@ -10,22 +10,22 @@
     "links": [
       {
         "rel": "manifest",
-        "href": "/caspel-pm/site.webmanifest?v=3"
+        "href": "/caspel-pm/site.webmanifest?v=4"
       },
       {
         "rel": "icon",
-        "href": "/caspel-pm/favicon.svg?v=3",
+        "href": "/caspel-pm/favicon.svg?v=4",
         "type": "image/svg+xml",
         "sizes": "any"
       },
       {
         "rel": "shortcut icon",
-        "href": "/caspel-pm/favicon.ico?v=3",
+        "href": "/caspel-pm/favicon.ico?v=4",
         "sizes": "16x16 32x32 48x48"
       },
       {
         "rel": "apple-touch-icon",
-        "href": "/caspel-pm/apple-touch-icon.png?v=3"
+        "href": "/caspel-pm/apple-touch-icon.png?v=4"
       }
     ]
   },
@@ -40,22 +40,22 @@
     "links": [
       {
         "rel": "manifest",
-        "href": "/caspel-pm/site.webmanifest?v=3"
+        "href": "/caspel-pm/site.webmanifest?v=4"
       },
       {
         "rel": "icon",
-        "href": "/caspel-pm/favicon.svg?v=3",
+        "href": "/caspel-pm/favicon.svg?v=4",
         "type": "image/svg+xml",
         "sizes": "any"
       },
       {
         "rel": "shortcut icon",
-        "href": "/caspel-pm/favicon.ico?v=3",
+        "href": "/caspel-pm/favicon.ico?v=4",
         "sizes": "16x16 32x32 48x48"
       },
       {
         "rel": "apple-touch-icon",
-        "href": "/caspel-pm/apple-touch-icon.png?v=3"
+        "href": "/caspel-pm/apple-touch-icon.png?v=4"
       }
     ]
   },
@@ -149,22 +149,22 @@
     "links": [
       {
         "rel": "manifest",
-        "href": "/caspel-pm/site.webmanifest?v=3"
+        "href": "/caspel-pm/site.webmanifest?v=4"
       },
       {
         "rel": "icon",
-        "href": "/caspel-pm/favicon.svg?v=3",
+        "href": "/caspel-pm/favicon.svg?v=4",
         "type": "image/svg+xml",
         "sizes": "any"
       },
       {
         "rel": "shortcut icon",
-        "href": "/caspel-pm/favicon.ico?v=3",
+        "href": "/caspel-pm/favicon.ico?v=4",
         "sizes": "16x16 32x32 48x48"
       },
       {
         "rel": "apple-touch-icon",
-        "href": "/caspel-pm/apple-touch-icon.png?v=3"
+        "href": "/caspel-pm/apple-touch-icon.png?v=4"
       }
     ]
   },
