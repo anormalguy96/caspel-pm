@@ -356,8 +356,8 @@ export async function createServer (
 
   app.get('/', (_req, res) => {
     res.send(`
-      Huly® Datalake™ <a href="https://huly.io">https://huly.io</a>
-      © 2025 <a href="https://hulylabs.com">Huly Labs</a>
+      Caspel PM Datalake service.
+      Based on the open-source Huly® Platform (EPL-2.0), © 2025 Huly Labs.
     `)
   })
 

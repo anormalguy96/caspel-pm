@@ -233,8 +233,8 @@ export async function createServer (ctx: MeasureContext, config: Config): Promis
 
   app.get('/', (_req, res) => {
     res.send(`
-      Huly&reg; Preview&trade; <a href="https://huly.io">https://huly.io</a>
-      © 2025 <a href="https://hulylabs.com">Huly Labs</a>
+      Caspel PM Preview service.
+      Based on the open-source Huly&reg; Platform (EPL-2.0), © 2025 Huly Labs.
     `)
   })
 

@@ -165,7 +165,7 @@ export const ReferenceExtension = ReferenceNode.extend<ReferenceExtensionOptions
       if (icon === view.ids.IconWithEmoji) {
         emojiCode = hierarchy.findClass(objectclass)?.color ?? 0
       } else if (typeof icon === 'string') {
-        iconUrl = getMetadata(icon) ?? 'https://anticrm.org/logo.svg'
+        iconUrl = getMetadata(icon) ?? ''
       }
 
       if (iconUrl !== '') {

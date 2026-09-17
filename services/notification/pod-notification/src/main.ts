@@ -26,9 +26,12 @@ export const main = async (ctx: MeasureContext): Promise<void> => {
   ctx.info('Notification service starting')
   let webpushInitDone = false
 
-  if (config.PushPublicKey !== undefined && config.PushPrivateKey !== undefined) {
+  // Caspel PM: the VAPID subject is the operator contact sent to push providers; no upstream default.
+  const subj = config.PushSubject
+  if (config.PushPublicKey !== undefined && config.PushPrivateKey !== undefined && subj === undefined) {
+    ctx.warn('PUSH_SUBJECT not configured; /web-push will return empty results until it is set')
+  } else if (config.PushPublicKey !== undefined && config.PushPrivateKey !== undefined && subj !== undefined) {
     try {
-      const subj = config.PushSubject ?? 'mailto:hey@huly.io'
       ctx.info('Setting VAPID details', {
         subject: subj,
         publicKeyLen: config.PushPublicKey.length,

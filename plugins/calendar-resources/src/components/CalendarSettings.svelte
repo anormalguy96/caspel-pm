@@ -1,7 +1,8 @@
 <script lang="ts">
   import core, { getCurrentAccount, groupByArray, Ref } from '@hcengineering/core'
   import { createQuery, getClient } from '@hcengineering/presentation'
-  import { Breadcrumb, Grid, Header, Label, Scroller, Toggle } from '@hcengineering/ui'
+  import { getMetadata } from '@hcengineering/platform'
+  import ui, { Breadcrumb, Grid, Header, Label, Scroller, Toggle } from '@hcengineering/ui'
   import calendar from '../plugin'
   import setting from '@hcengineering/setting'
   import { Calendar, ExternalCalendar, getPrimaryCalendar, PrimaryCalendar, Visibility } from '@hcengineering/calendar'
@@ -29,7 +30,7 @@
   )
 
   $: categories = groupByArray(calendars, (c) => {
-    return (c as ExternalCalendar).externalUser ?? 'HULY'
+    return (c as ExternalCalendar).externalUser ?? getMetadata(ui.metadata.PlatformTitle) ?? 'Caspel PM'
   })
 
   async function changeHidden (calendar: Calendar, value: boolean): Promise<void> {

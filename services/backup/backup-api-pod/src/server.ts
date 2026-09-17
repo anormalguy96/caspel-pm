@@ -361,8 +361,8 @@ export async function createServer (ctx: MeasureContext, config: Config): Promis
   })
 
   app.get('/', (req, res) => {
-    res.send(`Huly&reg; Backup&trade; <a href="https://huly.io">https://huly.io</a>
-      &copy; 2024 <a href="https://hulylabs.com">Huly Labs</a>`)
+    res.send(`Caspel PM Backup service.
+      Based on the open-source Huly&reg; Platform (EPL-2.0), &copy; 2024 Huly Labs.`)
   })
 
   const sendErrorToAnalytics = (err: any): boolean => {
@@ -422,8 +422,8 @@ export async function createServer (ctx: MeasureContext, config: Config): Promis
 
   app.get('/', (_req, res) => {
     res.send(`
-      Huly® Datalake™ <a href="https://huly.io">https://huly.io</a>
-      © 2025 <a href="https://hulylabs.com">Huly Labs</a>
+      Caspel PM Datalake service.
+      Based on the open-source Huly® Platform (EPL-2.0), © 2025 Huly Labs.
     `)
   })
 

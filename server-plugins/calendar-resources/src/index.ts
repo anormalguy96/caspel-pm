@@ -260,7 +260,8 @@ async function createCalendar (control: TriggerControl, account: AccountUuid, so
     calendar.class.Calendar,
     calendar.space.Calendar,
     {
-      name: 'HULY',
+      // Caspel PM: default internal calendar name follows the product title instead of the upstream name.
+      name: control.branding?.title ?? 'Caspel PM',
       hidden: false,
       visibility: 'public',
       user: socialId,
