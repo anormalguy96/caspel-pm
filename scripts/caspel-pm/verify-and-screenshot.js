@@ -48,7 +48,7 @@ async function verify() {
 
   console.log('Inspection result:', JSON.stringify(info, null, 2));
 
-  const artifactPath = 'C:\\Users\\Huawei\\.gemini\\antigravity-ide\\brain\\ad6ae1e5-42e9-4699-afbc-31a179fe792e\\caspel_login_fresh.png';
+  const artifactPath = 'C:\\Users\\Huawei\\.gemini\\antigravity-ide\\brain\\69fa64b7-10f8-43f8-b262-c7559e3a47ef\\caspel_login_clean.png';
   await page.screenshot({ path: artifactPath });
   console.log('Saved screenshot to:', artifactPath);
 
